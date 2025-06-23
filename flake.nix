@@ -12,8 +12,8 @@
     systems.url = "github:nix-systems/default";
 
     # keep-sorted start block=yes newline_separated=yes
-    base16-fish = {
-      url = "github:tomyun/base16-fish";
+    base24-fish = {
+      url = "github:LunaCOLON3/base24-fish";
       flake = false;
     };
 
