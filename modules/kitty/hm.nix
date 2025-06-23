@@ -38,8 +38,8 @@ mkTarget {
       }:
       let
         theme = colors {
-          templateRepo = inputs.tinted-kitty;
-          target = if cfg.variant256Colors then "base24-256-deprecated" else "base24";
+          templateRepo = inputs.tinted-terminal;
+          target = "kitty-base24";
         };
       in
       {

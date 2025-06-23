@@ -12,8 +12,8 @@
     systems.url = "github:nix-systems/default";
 
     # keep-sorted start block=yes newline_separated=yes
-    base16-fish = {
-      url = "github:tomyun/base16-fish";
+    tinted-shell = {
+      url = "github:tinted-theming/tinted-shell";
       flake = false;
     };
 
@@ -85,8 +85,8 @@
       flake = false;
     };
 
-    tinted-kitty = {
-      url = "github:tinted-theming/tinted-kitty";
+    tinted-terminal = {
+      url = "github:tinted-theming/tinted-terminal";
       flake = false;
     };
 
