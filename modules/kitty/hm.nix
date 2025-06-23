@@ -38,8 +38,8 @@ mkTarget {
       }:
       let
         theme = colors {
-          templateRepo = inputs.tinted-terminal;
-          target = "kitty-base24";
+          templateRepo = inputs.tinted-kitty;
+          target = "base24";
         };
       in
       {
