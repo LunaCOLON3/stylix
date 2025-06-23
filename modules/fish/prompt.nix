@@ -6,10 +6,10 @@ let
   };
 in
 ''
-  bash ${theme}
+  source ${theme}
 
   # See https://github.com/tomyun/base16-fish/issues/7 for why this condition exists
   if status --is-interactive && test -z "$TMUX"
-    base24-${colors.slug}
+    base16-${colors.slug}
   end
 ''
