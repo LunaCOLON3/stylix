@@ -1,9 +1,6 @@
 { colors, inputs }:
 let
-  theme = colors {
-    templateRepo = inputs.tinted-shell;
-    target = "base24";
-  };
+  theme = colors { templateRepo = inputs.base16-fish; };
 in
 ''
   source ${theme}
