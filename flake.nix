@@ -85,8 +85,8 @@
       flake = false;
     };
 
-    tinted-kitty = {
-      url = "github:tinted-theming/tinted-kitty";
+    tinted-terminal = {
+      url = "github:tinted-theming/tinted-terminal";
       flake = false;
     };
 
