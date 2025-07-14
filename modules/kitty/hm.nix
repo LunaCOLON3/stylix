@@ -39,7 +39,7 @@ mkTarget {
       let
         theme = colors {
           templateRepo = inputs.tinted-kitty;
-          target = if cfg.variant256Colors then "base16-256-deprecated" else "base16";
+          target = if cfg.variant256Colors then "base24-256-deprecated" else "base24";
         };
       in
       {
