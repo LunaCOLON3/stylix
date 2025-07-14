@@ -1,5 +1,7 @@
 # Stylix
 
+this is my terrible stylix fork that i made so i can use base24 themes instead of base16 themes among other things. please do not use this, it is extremely scuffed and i break things constantly
+
 ## About
 
 Stylix is a theming framework for [NixOS](https://nixos.org), [Home
