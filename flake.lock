@@ -54,11 +54,11 @@
     "base24-fish": {
       "flake": false,
       "locked": {
-        "lastModified": 1755641929,
-        "narHash": "sha256-OkjJE52zfUml4sNNjND/rVJYlQTMD915PHPdpcBGIOU=",
+        "lastModified": 1755651951,
+        "narHash": "sha256-rZm+JFiqgtjpVAnG1ML2CpgHH0jgKQX0mI1inpD1oIk=",
         "owner": "LunaCOLON3",
         "repo": "base24-fish",
-        "rev": "84205556d4a52456a820d9a1e80093cd6d374969",
+        "rev": "b0d1a474d0e71c216dd3da42452ccb557cd49406",
         "type": "github"
       },
       "original": {
@@ -162,11 +162,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755636118,
-        "narHash": "sha256-z7YFx7jgsD9oFxPZhqyyfYF03CFHMA0RSd0+VZT1q7k=",
+        "lastModified": 1755647128,
+        "narHash": "sha256-5fzWdzWNzcdryoWPUTz+UP4UssNY0cZgYKwB2ZAu3VU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "37aecf9f94568bff35e45ae3e9d0812a1b1c9b21",
+        "rev": "61336c89afcd2d1dc0f0c587bef0feb667c7918d",
         "type": "github"
       },
       "original": {
