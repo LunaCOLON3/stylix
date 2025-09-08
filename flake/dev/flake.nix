@@ -108,6 +108,7 @@
   #               inputs = {
   #                 nixpkgs.follows = "stylix/nixpkgs";
   #                 systems.follows = "stylix/systems";
+  #                 flake-compat.follows = "";
   #               };
   #             };
   #             # keep-sorted end
@@ -158,12 +159,29 @@
       inputs = {
         nixpkgs.follows = "dev-nixpkgs";
         systems.follows = "dev-systems";
+        flake-compat.follows = "";
+      };
+    };
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs = {
+        nixpkgs.follows = "dev-nixpkgs";
+        systems.follows = "dev-systems";
       };
     };
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "dev-nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "dev-nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
     # keep-sorted end
   };

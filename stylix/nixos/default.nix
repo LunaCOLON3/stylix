@@ -3,7 +3,6 @@
   config,
   ...
 }:
-
 let
   autoload = import ../autoload.nix { inherit lib; } "nixos";
 in
@@ -16,11 +15,14 @@ in
     ../home-manager-integration.nix
     ../opacity.nix
     ../palette.nix
+    ../icons.nix
     ../pixel.nix
     ../target.nix
     ../release.nix
     ../overlays.nix
-  ] ++ autoload;
+    ../ordering.nix
+  ]
+  ++ autoload;
   config.warnings =
     lib.mkIf
       (

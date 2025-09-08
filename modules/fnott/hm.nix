@@ -38,7 +38,7 @@ mkTarget {
               title-color = fg base05;
               summary-color = fg base05;
               body-color = fg base05;
-              progress-bar-color = fg base02;
+              progress-color = fg base02;
               background = bg base00;
             };
 
@@ -46,6 +46,13 @@ mkTarget {
             normal.border-color = fg base0D;
             critical.border-color = fg base08;
           };
+      }
+    )
+    (
+      { polarity, icons }:
+      {
+        services.fnott.settings.main."icon-theme" =
+          if (polarity == "dark") then icons.dark else icons.light;
       }
     )
   ];

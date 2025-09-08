@@ -3,7 +3,6 @@
   config,
   ...
 }:
-
 let
   autoload = import ../autoload.nix { inherit lib; } "darwin";
 in
@@ -18,7 +17,9 @@ in
     ../target.nix
     ../release.nix
     ../overlays.nix
-  ] ++ autoload;
+    ../ordering.nix
+  ]
+  ++ autoload;
   config.warnings =
     lib.mkIf
       (
