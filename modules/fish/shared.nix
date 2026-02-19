@@ -5,7 +5,7 @@ mkTarget {
     {
       programs.fish.interactiveShellInit =
         let
-          theme = colors { templateRepo = inputs.base16-fish; };
+          theme = colors { templateRepo = inputs.base24-fish; };
         in
         ''
           source ${theme}
