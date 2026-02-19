@@ -42,7 +42,7 @@ with colors;
     background-color: #${base00-hex} !important;
   }
 
-  #urlbar-background {
+  .urlbar-background {
     background-color: #${base02-hex} !important;
   }
 
@@ -53,6 +53,11 @@ with colors;
 
   .urlbarView-url {
     color: #${base0D-hex} !important;
+  }
+
+  #urlbar-input::selection {
+    background-color: #${base0D-hex} !important;
+    color: #${base00-hex} !important;
   }
 
   #zenEditBookmarkPanelFaviconContainer {
@@ -120,8 +125,8 @@ with colors;
     --identity-icon-color: #${base0F-hex} !important;
   }
 
-  hbox#titlebar {
-    background-color: #${base00-hex} !important;
+  #navigator-toolbox {
+    --zen-main-browser-background-toolbar: #${base00-hex} !important;
   }
 
   #zen-appcontent-navbar-container {

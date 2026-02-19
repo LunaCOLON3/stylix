@@ -1,14 +1,16 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
 let
-  autoload = import ../autoload.nix { inherit lib; } "darwin";
+  autoload = import ../autoload.nix { inherit lib pkgs; } "darwin";
 in
 {
   imports = [
     ./palette.nix
+    ../colors.nix
     ../fonts.nix
     ../home-manager-integration.nix
     ../opacity.nix

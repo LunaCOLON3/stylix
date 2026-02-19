@@ -6,8 +6,6 @@
   writeText,
   stdenvNoCC,
   mdbook,
-  mdbook-alerts,
-  mdbook-linkcheck,
 }:
 let
   # Prefix to remove from option declaration file paths.
@@ -314,7 +312,7 @@ let
     lib.pipe platforms.${platform}.configuration.options [
 
       # Drop options that come from the module system
-      (lib.flip builtins.removeAttrs [ "_module" ])
+      (lib.flip removeAttrs [ "_module" ])
 
       # Get a list of all options, flattening sub-options recursively.
       # This also normalises things like `defaultText` and `visible="shallow"`.
@@ -657,11 +655,7 @@ in
 stdenvNoCC.mkDerivation {
   name = "stylix-book";
   src = ./.;
-  buildInputs = [
-    mdbook
-    mdbook-alerts
-    mdbook-linkcheck
-  ];
+  buildInputs = [ mdbook ];
 
   inherit extraCSS renderedSummary;
   passAsFile = [
@@ -684,7 +678,7 @@ stdenvNoCC.mkDerivation {
   '';
 
   postBuild = ''
-    cp --recursive book/html $out
+    cp --recursive book $out
     cat $extraCSSPath >>$out/css/general.css
   '';
 }

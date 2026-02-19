@@ -23,7 +23,7 @@
   #             dev-systems.url = "github:nix-systems/default";
   #
   #             # keep-sorted start block=yes newline_separated=yes
-  #             flake-compat.url = "github:edolstra/flake-compat";
+  #             flake-compat.url = "github:NixOS/flake-compat";
   #
   #             git-hooks = {
   #               url = "github:cachix/git-hooks.nix";
@@ -79,7 +79,7 @@
   #             };
   #
   #             # keep-sorted start block=yes newline_separated=yes
-  #             flake-compat.url = "github:edolstra/flake-compat";
+  #             flake-compat.url = "github:NixOS/flake-compat";
   #
   #             git-hooks = {
   #               url = "github:cachix/git-hooks.nix";
@@ -120,7 +120,7 @@
   #
   #       [1]: https://github.com/NixOS/nix/blob/d4f67fd46dfe2bc950bdfa14273f87b8a4c32e47/doc/manual/source/release-notes/rl-2.26.md?plain=1#L3-L11
   inputs = {
-    dev-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    dev-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     dev-flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -130,12 +130,18 @@
     dev-systems.url = "github:nix-systems/default";
 
     # keep-sorted start block=yes newline_separated=yes
-    flake-compat.url = "github:edolstra/flake-compat";
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "dev-nixpkgs";
+    };
+
+    flake-compat.url = "github:NixOS/flake-compat";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs = {
         flake-compat.follows = "flake-compat";
+        gitignore.follows = "";
         nixpkgs.follows = "dev-nixpkgs";
       };
     };
@@ -154,12 +160,18 @@
       };
     };
 
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "dev-nixpkgs";
+    };
+
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs = {
         nixpkgs.follows = "dev-nixpkgs";
         systems.follows = "dev-systems";
         flake-compat.follows = "";
+        flake-parts.follows = "dev-flake-parts";
       };
     };
 
@@ -174,6 +186,14 @@
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "dev-nixpkgs";
+    };
+
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs = {
+        nixpkgs.follows = "dev-nixpkgs";
+        systems.follows = "dev-systems";
+      };
     };
 
     zen-browser = {

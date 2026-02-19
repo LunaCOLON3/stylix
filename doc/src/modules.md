@@ -49,10 +49,7 @@ documentation for more details):
 ```nix
 { config, lib, mkTarget ... }:
 mkTarget {
-  name = "«name»";
-  humanName = "«human readable name»";
-
-  configElements =
+  config =
     { colors }:
     {
       programs.«name».theme.background = colors.base00;
@@ -182,6 +179,15 @@ individually.
 Also note that reading generated files with `builtins.readFile` can be very slow
 and should be avoided.
 
+
+### Hexadecimal colors
+
+- config.lib.stylix.mkHexColor`: Converts a hex `color` (e.g., `RRGGBB` or
+  `#RRGGBB`) to `0xRRGGBB`.
+
+- `config.lib.stylix.mkOpacityHexColor`: Converts a hex `color` and `opacity`
+  (0–1) to `0xRRGGBBAA`.
+
 ## How to apply other things
 
 For everything else, like fonts and wallpapers, you can just take option values
@@ -237,8 +243,8 @@ number of maintainers:
   { lib, ... }:
   {
     maintainers = with lib.maintainers; [
-      awwpotato
       danth
+      da157
       naho
     ];
   }

@@ -6,9 +6,6 @@
   ...
 }:
 mkTarget {
-  name = "swaylock";
-  humanName = "Swaylock";
-
   # When the state version is older than 23.05, Swaylock enables itself
   # automatically if `settings != {}` [1]. Therefore, Swaylock theming
   # shouldn't be enabled by default for such state versions, to avoid
@@ -26,9 +23,7 @@ mkTarget {
     lib.versionAtLeast config.home.stateVersion "23.05" && pkgs.stdenv.hostPlatform.isLinux
   '';
 
-  extraOptions.useWallpaper = config.lib.stylix.mkEnableWallpaper "Swaylock" true;
-
-  configElements = [
+  config = [
     (
       { colors }:
       {
@@ -69,9 +64,9 @@ mkTarget {
       }
     )
     (
-      { cfg, image }:
+      { image }:
       {
-        programs.swaylock.settings.image = lib.mkIf cfg.useWallpaper image;
+        programs.swaylock.settings.image = image;
       }
     )
     (
@@ -95,6 +90,22 @@ mkTarget {
         "targets"
         "swaylock"
         "useWallpaper"
+      ];
+    })
+    (lib.mkRenamedOptionModuleWith {
+      from = [
+        "stylix"
+        "targets"
+        "swaylock"
+        "useWallpaper"
+      ];
+      sinceRelease = 2605;
+      to = [
+        "stylix"
+        "targets"
+        "swaylock"
+        "image"
+        "enable"
       ];
     })
   ];

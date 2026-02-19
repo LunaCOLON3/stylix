@@ -1,9 +1,6 @@
 { mkTarget, lib, ... }:
 mkTarget {
-  name = "qutebrowser";
-  humanName = "Qutebrowser";
-
-  configElements = [
+  config = [
     (
       { fonts }:
       {
@@ -56,7 +53,7 @@ mkTarget {
       in
       {
         programs.qutebrowser.settings = {
-          hints.border = background;
+          hints.border = "1px solid ${background}";
 
           colors = {
             completion = {
@@ -82,6 +79,7 @@ mkTarget {
                 };
 
                 fg = foreground;
+                match.fg = info;
               };
 
               match.fg = info;
@@ -163,9 +161,10 @@ mkTarget {
 
             prompts = {
               bg = background;
-              border = background;
+              border = "1px solid ${background}";
               fg = foreground;
               selected.bg = secondary-background;
+              selected.fg = foreground;
             };
 
             statusbar = {
@@ -280,8 +279,12 @@ mkTarget {
                 };
               };
             };
-          };
 
+            tooltip = {
+              bg = background;
+              fg = foreground;
+            };
+          };
         };
       }
     )

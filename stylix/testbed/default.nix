@@ -10,7 +10,7 @@ let
     name: testbed:
     let
       system = lib.nixosSystem {
-        inherit (pkgs) system;
+        inherit (pkgs.stdenv.hostPlatform) system;
 
         modules = [
           (lib.modules.importApply ./modules/flake-parts.nix inputs)
@@ -33,16 +33,33 @@ let
               )
             )
             {
-              inherit (inputs.nixvim.nixosModules) nixvim;
               inherit (inputs.spicetify-nix.nixosModules) spicetify;
+
+              dank-material-shell.home-manager.sharedModules = [
+                inputs.dankMaterialShell.homeModules.dank-material-shell
+              ];
+
+              nixvim-integrated = inputs.nixvim.nixosModules.nixvim;
+
+              nixvim-standalone.lib.stylix.testbed = {
+                inherit (inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system})
+                  makeNixvim
+                  ;
+              };
+
+              noctalia-shell.home-manager.sharedModules = [
+                inputs.noctalia-shell.homeModules.default
+              ];
 
               nvf = inputs.nvf.nixosModules.default;
 
-              zen-browser = {
-                home-manager.sharedModules = [
-                  inputs.zen-browser.homeModules.default
-                ];
-              };
+              vicinae.home-manager.sharedModules = [
+                inputs.vicinae.homeManagerModules.default
+              ];
+
+              zen-browser.home-manager.sharedModules = [
+                inputs.zen-browser.homeModules.default
+              ];
             };
       };
     in

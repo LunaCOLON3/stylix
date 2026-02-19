@@ -1,16 +1,18 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
 let
-  autoload = import ../autoload.nix { inherit lib; } "hm";
+  autoload = import ../autoload.nix { inherit lib pkgs; } "hm";
 in
 {
   imports = [
     ./cursor.nix
     ./icons.nix
     ./palette.nix
+    ../colors.nix
     ../cursor.nix
     ../fonts.nix
     ../icons.nix

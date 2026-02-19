@@ -1,26 +1,39 @@
 {
   mkTarget,
   pkgs,
-  config,
   lib,
   ...
 }:
 mkTarget {
-  name = "gnome";
-  humanName = "GNOME";
+  imports = [
+    (lib.mkRenamedOptionModuleWith {
+      from = [
+        "stylix"
+        "targets"
+        "gnome"
+        "useWallpaper"
+      ];
+      sinceRelease = 2605;
+      to = [
+        "stylix"
+        "targets"
+        "gnome"
+        "image"
+        "enable"
+      ];
+    })
+  ];
 
   autoEnable = pkgs.stdenv.hostPlatform.isLinux;
   autoEnableExpr = "pkgs.stdenv.hostPlatform.isLinux";
 
-  extraOptions.useWallpaper = config.lib.stylix.mkEnableWallpaper "GNOME" true;
-
-  configElements = [
+  config = [
     (
-      { cfg, image }:
+      { image }:
       {
         dconf.settings."org/gnome/desktop/background" = {
-          picture-uri = lib.mkIf cfg.useWallpaper "file://${image}";
-          picture-uri-dark = lib.mkIf cfg.useWallpaper "file://${image}";
+          picture-uri = "file://${image}";
+          picture-uri-dark = "file://${image}";
         };
       }
     )
@@ -114,9 +127,7 @@ mkTarget {
           dataFile."themes/Stylix/gnome-shell/gnome-shell.css" = {
             source =
               let
-                theme = pkgs.callPackage ./theme.nix {
-                  inherit inputs colors;
-                };
+                theme = pkgs.callPackage ./theme.nix { inherit inputs colors; };
               in
               "${theme}/share/gnome-shell/gnome-shell.css";
 

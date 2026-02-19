@@ -1,21 +1,27 @@
-{
-  mkTarget,
-  config,
-  lib,
-  ...
-}:
+{ mkTarget, lib, ... }:
 mkTarget {
-  name = "lightdm";
-  humanName = "LightDM";
+  imports = [
+    (lib.mkRenamedOptionModuleWith {
+      from = [
+        "stylix"
+        "targets"
+        "lightdm"
+        "useWallpaper"
+      ];
+      sinceRelease = 2605;
+      to = [
+        "stylix"
+        "targets"
+        "lightdm"
+        "image"
+        "enable"
+      ];
+    })
+  ];
 
-  extraOptions = {
-    useWallpaper = config.lib.stylix.mkEnableWallpaper "LightDM" true;
-  };
-
-  configElements =
-    { cfg, image }:
+  config =
+    { image }:
     {
-      services.xserver.displayManager.lightdm.background =
-        lib.mkIf cfg.useWallpaper image;
+      services.xserver.displayManager.lightdm.background = image;
     };
 }

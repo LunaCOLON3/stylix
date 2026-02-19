@@ -6,15 +6,38 @@
   ...
 }:
 mkTarget {
-  name = "regreet";
-  humanName = "ReGreet";
+  imports = [
+    (lib.mkRenamedOptionModuleWith {
+      from = [
+        "stylix"
+        "targets"
+        "regreet"
+        "useWallpaper"
+      ];
+      sinceRelease = 2605;
+      to = [
+        "stylix"
+        "targets"
+        "regreet"
+        "image"
+        "enable"
+      ];
+    })
+  ];
 
   autoEnable = pkgs.stdenv.hostPlatform.isLinux;
   autoEnableExpr = "pkgs.stdenv.hostPlatform.isLinux";
 
-  extraOptions.useWallpaper = config.lib.stylix.mkEnableWallpaper "ReGreet" true;
+  options.extraCss = lib.mkOption {
+    description = ''
+      Extra code added to `programs.regreet.extraCss` option.
+    '';
+    type = lib.types.lines;
+    default = "";
+    example = "window.background { border-radius: 0; }";
+  };
 
-  configElements = [
+  config = [
     {
       warnings =
         let
@@ -35,6 +58,24 @@ mkTarget {
       };
     }
     (
+      { cfg, colors }:
+      let
+        baseCss = colors {
+          # This is strongly inspired by ../gtk/gtk.mustache.
+          template = ./gtk.css.mustache;
+          extension = ".css";
+        };
+
+        finalCss = pkgs.runCommandLocal "gtk.css" { } ''
+          cat ${baseCss} >>$out
+          echo ${lib.escapeShellArg cfg.extraCss} >>$out
+        '';
+      in
+      {
+        programs.regreet.extraCss = finalCss.outPath;
+      }
+    )
+    (
       { polarity }:
       {
         programs.regreet.settings.GTK.application_prefer_dark_theme =
@@ -42,15 +83,15 @@ mkTarget {
       }
     )
     (
-      { cfg, image }:
+      { image }:
       {
-        programs.regreet.settings.background.path = lib.mkIf cfg.useWallpaper image;
+        programs.regreet.settings.background.path = image;
       }
     )
     (
-      { cfg, imageScalingMode }:
+      { imageScalingMode }:
       {
-        programs.regreet.settings.background.fit = lib.mkIf cfg.useWallpaper (
+        programs.regreet.settings.background.fit =
           if imageScalingMode == "fill" then
             "Cover"
           else if imageScalingMode == "fit" then
@@ -59,23 +100,27 @@ mkTarget {
             "Fill"
           # No other available options
           else
-            null
-        );
+            null;
       }
     )
     (
       { fonts }:
       {
-        programs.regreet.font = {
-          inherit (fonts.sansSerif) name package;
-        };
+        programs.regreet.font = { inherit (fonts.sansSerif) name package; };
       }
     )
     (
       { cursor }:
       {
-        programs.regreet.cursorTheme = {
-          inherit (cursor) name package;
+        programs.regreet.cursorTheme = { inherit (cursor) name package; };
+      }
+    )
+    (
+      { polarity, icons }:
+      {
+        programs.regreet.iconTheme = {
+          inherit (icons) package;
+          name = if (polarity == "dark") then icons.dark else icons.light;
         };
       }
     )

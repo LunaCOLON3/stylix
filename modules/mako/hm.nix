@@ -1,10 +1,7 @@
 { mkTarget, lib, ... }:
 mkTarget {
-  name = "mako";
-  humanName = "Mako";
-
   # Referenced https://github.com/stacyharper/base16-mako
-  configElements = [
+  config = [
     (
       { fonts }:
       {
@@ -31,7 +28,7 @@ mkTarget {
                 border-color = base03;
                 text-color = base05;
               };
-              "urgency=high" = {
+              "urgency=critical" = {
                 background-color = "${base00}${makoOpacity}";
                 border-color = base08;
                 text-color = base05;

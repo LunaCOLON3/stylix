@@ -1,15 +1,17 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
 let
-  autoload = import ../autoload.nix { inherit lib; } "nixos";
+  autoload = import ../autoload.nix { inherit lib pkgs; } "nixos";
 in
 {
   imports = [
     ./cursor.nix
     ./palette.nix
+    ../colors.nix
     ../cursor.nix
     ../fonts.nix
     ../home-manager-integration.nix

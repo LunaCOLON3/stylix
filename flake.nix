@@ -24,7 +24,7 @@
 
     base16-vim = {
       # TODO: Unlock this input once [1] ("Seemingly bad parsing of whitespace
-      # in abbriviated lists (affecting stylix's handling of base16-vim)") is
+      # in abbreviated lists (affecting stylix's handling of base16-vim)") is
       # resolved, preventing us from fetching commit [2] ("fix(theme): Remove
       # illegal style attributes").
       #
@@ -42,10 +42,9 @@
     };
 
     gnome-shell = {
-      # TODO: Unlocking the input and pointing to official repository requires
-      # updating the patch:
+      # TODO: Unlocking the input requires updating the patch:
       # https://github.com/nix-community/stylix/pull/224#discussion_r1460339607.
-      url = "github:GNOME/gnome-shell/48.2";
+      url = "gitlab:GNOME/gnome-shell/gnome-49?host=gitlab.gnome.org";
       flake = false;
     };
 
@@ -89,6 +88,13 @@
       flake = false;
     };
     # keep-sorted end
+  };
+
+  nixConfig = {
+    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
   outputs =
